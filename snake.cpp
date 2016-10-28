@@ -6,10 +6,10 @@
 
 using namespace std;
 
-char coordinates[10][25];
+char coordinates[15][15];
 enum eDirection {STOP = 0, LEFT, RIGHT, UP, DOWN};
 eDirection edir;
-int headposition_x  = 5, headposition_y  = 12, fruit_x = 1+(rand() % 7), fruit_y = 1+(rand() % 22), score = 0;
+int headposition_x  = 8, headposition_y  = 8, fruit_x = 1+(rand() % 12), fruit_y = 1+(rand() % 12), score = 0;
 bool GameOver = false;
 int tailPosition_x[100], tailPosition_y[100];
 int nTail = 0;
@@ -22,16 +22,16 @@ void snake::print_field()
 {
     cout << "Score: " << score << endl;
 
-    for(int x = 0; x < 10;x++){
-        for(int y = 0; y < 25;y++){
-            if(x==0 || x == 9){
+    for(int x = 0; x < 15;x++){
+        for(int y = 0; y < 15;y++){
+            if(x==0 || x == 14){
 
                 coordinates[x][y] = '#';
 
             }else{
                 coordinates[x][y] = ' ';
                 coordinates[x][0] = '#';
-                coordinates[x][24]= '#';
+                coordinates[x][14]= '#';
                 for(int k = 0; k < nTail; k++){
 
                     coordinates[tailPosition_x[k]][tailPosition_y[k]] = '+' ;
@@ -75,7 +75,7 @@ bool snake::input(){
     return GameOver;
 }
 bool snake::logic(){
-    // prevTail_x/y = das erste segment hinter dem kopf
+    
     int prevTail_x = headposition_x;
     int prevTail_y = headposition_y;
     int prevTail2_x, prevTail2_y;
@@ -104,7 +104,7 @@ bool snake::logic(){
                     headposition_y++;
                     break;
         }
-        if(headposition_x == 9 || headposition_y == 0 || headposition_x == 0 || headposition_y == 24){
+        if(headposition_x == 14 || headposition_y == 0 || headposition_x == 0 || headposition_y == 14){
 
             GameOver = true;
 
@@ -112,7 +112,7 @@ bool snake::logic(){
 
             score += 10;
             srand(time(0));
-            fruit_x = 1+(rand() % 7), fruit_y = 1+(rand() % 22);
+            fruit_x = 1+(rand() % 12), fruit_y = 1+(rand() % 12);
             nTail++;
         }
         return GameOver;
