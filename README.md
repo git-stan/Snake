@@ -4,3 +4,4 @@ control : 'w' = up
           's' = down
           'a' = left
           'd' = right
+          'x' = leave the game
